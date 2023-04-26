@@ -235,6 +235,17 @@ define Package/prometheus-node-exporter-lua-realtek-poe/install
 	$(INSTALL_BIN) ./files/usr/lib/lua/prometheus-collectors/realtek-poe.lua $(1)/usr/lib/lua/prometheus-collectors/
 endef
 
+define Package/prometheus-node-exporter-lua-gsm
+  $(call Package/prometheus-node-exporter-lua/Default)
+  TITLE+= (gsm collector)
+  DEPENDS:=prometheus-node-exporter-lua +libuci-lua +libperiphery
+endef
+
+define Package/prometheus-node-exporter-lua-gsm/install
+	$(INSTALL_DIR) $(1)/usr/lib/lua/prometheus-collectors
+	$(INSTALL_BIN) ./files/usr/lib/lua/prometheus-collectors/gsm.lua $(1)/usr/lib/lua/prometheus-collectors/
+endef
+
 $(eval $(call BuildPackage,prometheus-node-exporter-lua))
 $(eval $(call BuildPackage,prometheus-node-exporter-lua-bmx6))
 $(eval $(call BuildPackage,prometheus-node-exporter-lua-bmx7))
